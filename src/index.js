@@ -37,9 +37,10 @@ const routerVariable = createBrowserRouter([
         element: <Task></Task>,
       },
       {
-        path: "/task-detail",
+        path: "task/task-detail/:resId",
         element: <TaskDetail></TaskDetail>,
       },
+     
       {
         path: "*",
         element: <h1>404 Page not Founded </h1>,
@@ -51,7 +52,7 @@ const routerVariable = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={routerVariable}></RouterProvider>
+    <RouterProvider RouterProvider router={routerVariable}></RouterProvider>
   </React.StrictMode>
 );
 
