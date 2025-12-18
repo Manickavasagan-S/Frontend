@@ -29,7 +29,7 @@ function App() {
       <Header></Header>
       <Outlet 
       context={{
-        data,
+        data,setData
       }}
       ></Outlet>
     </div>

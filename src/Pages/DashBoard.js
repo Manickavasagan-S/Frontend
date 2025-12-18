@@ -1,22 +1,9 @@
 import { NavLink, useOutletContext } from "react-router-dom";
 import "../Styles/Dashboard.css";
-import { useState } from "react";
+import "../Styles/TaskCard.css";
 
 export const DashBoard = () => {
   const { data } = useOutletContext();
-
-  let [BgColor, SetBgColor] = useState("");
-
-  let Background = () => {
-    if (data.priority === "High") {
-      SetBgColor("High");
-    } else if (data.priority === "Medium") {
-      SetBgColor("Medium");
-    } else if (data.priority === "Low") {
-      SetBgColor("Low");
-    }
-  };
-
   return (
     <div className="Dashboard">
       <h1>Task Management System</h1>
@@ -35,7 +22,9 @@ export const DashBoard = () => {
                   </section>
 
                   <p>{data.dueDate}</p>
-                  <button>View Task</button>
+                  <NavLink to={`/task/task-detail/${data.id}`}>
+                    <button>View Task</button>
+                  </NavLink>
                 </div>
               ))}
           </div>

@@ -1,3 +1,66 @@
-.Task{
-    display: flex;
+.Task {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.taskFilters {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filterGroup label {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.filterGroup select {
+  padding: 0.5rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 1rem;
+  min-width: 120px;
+}
+
+.TaskGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.TaskGrid .TaskCard {
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.TaskGrid .TaskCard section {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .Task {
+    padding: 1rem;
+  }
+  
+  .TaskGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .taskFilters {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

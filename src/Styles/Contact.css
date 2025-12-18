@@ -1,0 +1,40 @@
+.Contactpage, 
+.AboutPage {
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 10px;
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.Contactpage h1,
+.AboutPage h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+  letter-spacing: 1px;
+}
+
+.Contactpage section {
+  display: grid;
+  grid-template-columns: 150px auto;
+  row-gap: 12px;
+  column-gap: 10px;
+}
+
+.Contactpage label {
+  font-weight: bold;
+  color: #444;
+}
+
+.Contactpage p {
+  margin: 0;
+  color: #555;
+}
+
+.AboutPage p {
+  line-height: 1.6;
+  color: #444;
+  margin-top: 15px;
+}

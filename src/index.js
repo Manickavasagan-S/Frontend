@@ -6,10 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CreateTask } from "./Pages/CreateTask";
 import { DashBoard } from "./Pages/DashBoard";
-import { Login } from "./Pages/Login";
 import { Register } from "./Pages/Register";
 import { Task } from "./Pages/Task";
 import { TaskDetail } from "./Pages/TaskDetail";
+import { Productauth } from "./Pages/Protectauth";
+import { Contact } from "./Pages/Contact";
+import { Home } from "./Pages/Home";
+import { Sign_Log_in } from "./Pages/Sign_Log_in";
 
 const routerVariable = createBrowserRouter([
   {
@@ -18,15 +21,27 @@ const routerVariable = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,  
+      },
+      {
+        path: "/dashBoard",
         element: <DashBoard />,
       },
       {
         path: "/create-task",
-        element: <CreateTask></CreateTask>,
+        element: (
+          <Productauth>
+            <CreateTask></CreateTask>{" "}
+          </Productauth>
+        ),
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Sign_Log_in></Sign_Log_in>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
       {
         path: "/register",
@@ -40,7 +55,7 @@ const routerVariable = createBrowserRouter([
         path: "task/task-detail/:resId",
         element: <TaskDetail></TaskDetail>,
       },
-     
+
       {
         path: "*",
         element: <h1>404 Page not Founded </h1>,
