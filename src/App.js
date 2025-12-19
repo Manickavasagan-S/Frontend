@@ -10,11 +10,20 @@ function App() {
   
 
   useEffect(()=>{
-    const FetchTaskApi  = async ()=>{
+    const FetchTaskApi = async ()=>{
+      const token = sessionStorage.getItem('token');
+      if (!token) return;
+      
       try{
-        const respose = await fetch("http://localhost:3000/Task.json");
-        const da=await respose.json();
-        setData(da)
+        const response = await fetch("https://backend-e6q4.onrender.com/api/tasks", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const result = await response.json();
+        if (result.success) {
+          setData(result.data);
+        }
       }
       catch(err){}
     };

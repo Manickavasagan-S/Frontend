@@ -8,6 +8,7 @@ export const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "user"
   });
 
   const handleChange = (e) => {
@@ -17,14 +18,37 @@ export const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    console.log("Registration data:", formData);
-    alert("Registration successful!");
+    
+    try {
+      const response = await fetch('https://backend-e6q4.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: formData.role
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        sessionStorage.setItem('token', data.data.token);
+        alert("Registration successful!");
+        window.location.href = '/dashboard';
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      alert('Registration failed');
+    }
   };
 
   return (
@@ -71,6 +95,17 @@ export const Register = () => {
           placeholder="Confirm your password"
           required
         />
+
+        <label>Role</label>
+        <select
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+          required
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
 
         <button className="registerButton" type="submit">
           Register

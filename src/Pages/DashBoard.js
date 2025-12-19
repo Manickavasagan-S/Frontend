@@ -1,9 +1,24 @@
 import { NavLink, useOutletContext } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../Styles/Dashboard.css";
 import "../Styles/TaskCard.css";
 
 export const DashBoard = () => {
   const { data } = useOutletContext();
+  const token = sessionStorage.getItem('token');
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setIsAdmin(payload.role === 'admin');
+      } catch (error) {
+        setIsAdmin(false);
+      }
+    }
+  }, [token]);
+  
   return (
     <div className="Dashboard">
       <h1>Task Management System</h1>
@@ -34,9 +49,11 @@ export const DashBoard = () => {
           <NavLink to={"/task"}>
             <button className="View">View Task</button>
           </NavLink>
-          <NavLink to={"/create-task"}>
-            <button className="Create">Create Task</button>
-          </NavLink>
+          {isAdmin && (
+            <NavLink to={"/create-task"}>
+              <button className="Create">Create Task</button>
+            </NavLink>
+          )}
         </div>
       </section>
     </div>

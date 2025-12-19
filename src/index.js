@@ -24,14 +24,18 @@ const routerVariable = createBrowserRouter([
         element: <Home />,  
       },
       {
-        path: "/dashBoard",
-        element: <DashBoard />,
+        path: "/dashboard",
+        element: (
+          <Productauth>
+            <DashBoard />
+          </Productauth>
+        ),
       },
       {
         path: "/create-task",
         element: (
           <Productauth>
-            <CreateTask></CreateTask>{" "}
+            <CreateTask></CreateTask>
           </Productauth>
         ),
       },
@@ -41,7 +45,11 @@ const routerVariable = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact></Contact>,
+        element: (
+          <Productauth>
+            <Contact></Contact>
+          </Productauth>
+        ),
       },
       {
         path: "/register",
@@ -49,11 +57,19 @@ const routerVariable = createBrowserRouter([
       },
       {
         path: "/task",
-        element: <Task></Task>,
+        element: (
+          <Productauth>
+            <Task></Task>
+          </Productauth>
+        ),
       },
       {
         path: "task/task-detail/:resId",
-        element: <TaskDetail></TaskDetail>,
+        element: (
+          <Productauth>
+            <TaskDetail></TaskDetail>
+          </Productauth>
+        ),
       },
 
       {

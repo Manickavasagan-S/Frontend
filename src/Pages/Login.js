@@ -5,12 +5,27 @@ export const Login = () => {
   let [email, setEmail] = useState("");
   let [password, SetPassword] = useState("");
 
-  const HandleSubmit = (e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
-
-    if(email === "admin@gmail.com" && password === "admin123"){
-      localStorage.getItem("auth",true);
+    
+    try {
+      const response = await fetch('https://backend-e6q4.onrender.com/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Store only token in session
+        sessionStorage.setItem('token', data.data.token);
+        window.location.href = '/dashboard';
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      alert('Login failed');
     }
   };
 

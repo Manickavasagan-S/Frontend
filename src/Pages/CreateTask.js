@@ -15,13 +15,39 @@ export const CreateTask = () => {
     },
   });
 
-  const onSubmitHandle = (fdata) => {
-    console.log(fdata);
-    fdata.title.split(",").map((e) => e.trim());
-    alert("Data added successfully");
-    fdata.id = Date.now();
-
-    console.log(fdata);
+  const onSubmitHandle = async (fdata) => {
+    const token = sessionStorage.getItem('token');
+    console.log('Token:', token);
+    
+    
+    try {
+      const response = await fetch('https://backend-e6q4.onrender.com/api/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          title: fdata.title,
+          description: fdata.description,
+          priority: fdata.priority,
+          dueDate: fdata.dueDate
+        })
+      });
+      
+      const data = await response.json();
+      console.log('Response:', data);
+      
+      if (data.success) {
+        alert("Task created successfully!");
+        window.location.href = '/task';
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log('Error:', error);
+      alert('Failed to create task');
+    }
   };
 
   return (
